@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="brand">Travel</a>
+        <div class="menu-btn" aria-label="Menu"></div>
+        <div class="navigation">
+            <div class="navigation-item">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Explore</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </header>
+    <section class="home">
+        <div class="video-container">
+            <video class="video-slide active" src="./GREENLAND - LAND OF ICE 4K.mp4" autoplay muted loop></video>
+            <video class="video-slide" src="./ICELAND - DJI Mavic 3 & Sony A7IV _ Cinematic Travel Video.mp4" autoplay muted loop></video>
+            <video class="video-slide" src="./SILENCE _ A cinematic shortfilm _ Sony a7sIII.mp4" autoplay muted loop></video>
+            <video class="video-slide" src="./ICELAND - DJI Mavic 3 & Sony A7IV _ Cinematic Travel Video.mp4" autoplay muted loop></video>
+            <video class="video-slide" src="./SILENCE _ A cinematic shortfilm _ Sony a7sIII.mp4" autoplay muted loop></video>
+        </div>
+        <div class="content">
+            <h1>Wonderful<br> <span>Island</span></h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit quia inventore quod architecto quam natus impedit a placeat nisi officia sint provident, possimus fuga nulla distinctio tempore modi incidunt! Minima?</p>
+            <a href="#">Read More</a>
+            <div class="media-icon">
+                <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="slider-navigation">
+            <div class="nav-btn" data-index="0"></div>
+            <div class="nav-btn" data-index="1"></div>
+            <div class="nav-btn" data-index="2"></div>
+            <div class="nav-btn" data-index="3"></div>
+            <div class="nav-btn" data-index="4"></div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        const menuBtn = document.querySelector(".menu-btn");
+        const navigation = document.querySelector(".navigation");
+        menuBtn.addEventListener("click", () => {
+            menuBtn.classList.toggle("active");
+            navigation.classList.toggle("active");
+        });
+
+        const btns = document.querySelectorAll(".nav-btn");
+        const slides = document.querySelectorAll(".video-slide");
+
+        btns.forEach((btn, i) => {
+            btn.addEventListener("click", () => {
+                slidernav(i);
+            });
+        });
+
+        function slidernav(manual) {
+            slides.forEach(slide => slide.classList.remove("active"));
+            btns.forEach(btn => btn.classList.remove("active"));
+            slides[manual].classList.add("active");
+            btns[manual].classList.add("active");
+        }
+
+        // Initial state: Only the first video is visible
+        slides.forEach((slide, index) => {
+            if (index !== 0) {
+                slide.style.display = 'none'; // Hide all except the first
+            }
+        });
+
+        // Add logic to show/hide videos based on active state
+        const updateVisibility = () => {
+            slides.forEach((slide, index) => {
+                slide.style.display = index === [...btns].findIndex(btn => btn.classList.contains('active')) ? 'block' : 'none';
+            });
+        };
+        
+        btns.forEach(btn => {
+            btn.addEventListener('click', updateVisibility);
+        });
+    </script>
+</body>
+</html>
